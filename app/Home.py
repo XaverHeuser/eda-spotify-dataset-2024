@@ -12,6 +12,7 @@ from utils.data_analysis import (
     get_top_tracks,
     get_audio_features,
     get_banger,
+    get_track_releases,
 )
 from utils.data_loader import load_data
 
@@ -100,7 +101,6 @@ with tabs[1]:
 
 with tabs[2]:
     st.header('Audio Features')
-    st.info('Audio features analysis will be displayed here.')
 
     df_audio_features = get_audio_features(df)
     fig, ax = plt.subplots(figsize=(8, 5))
@@ -118,5 +118,26 @@ with tabs[2]:
 
 
 with tabs[3]:
-    st.header('Release Analysis')
-    st.info('Release information analysis will be displayed here.')
+    st.header('Track Release Analysis')
+
+    df_track_release = get_track_releases(df)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.barplot(
+        x="released_month", y="total_streams", data=df_track_release, ax=ax
+    )
+    ax.set_xlabel("Release Month")
+    ax.set_ylabel("Total Streams")
+    ax.set_title("Total Streams by Release Month in 2023")
+    fig.tight_layout()
+    st.pyplot(fig)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.barplot(
+        x="released_month", y="count_tracks", data=df_track_release, palette="coolwarm", ax=ax
+    )
+    ax.set_xlabel("Release Month")
+    ax.set_ylabel("Number of Tracks Released")
+    ax.set_title("Number of Tracks Released by Month in 2023")
+    fig.tight_layout()
+    st.pyplot(fig)

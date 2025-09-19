@@ -48,3 +48,23 @@ def get_audio_features(df: pd.DataFrame):
     df_audio_features = df_audio[audio_features]
 
     return df_audio_features
+
+
+def get_track_release_analysis(df: pd.DataFrame):
+    """Analyzes track releases over the years."""
+    df_release_time = df.copy()
+    df_release_time = df_release_time.groupby("released_month") \
+        .agg(total_streams=("streams", "sum"), count_tracks=('streams', 'count')) \
+        .reset_index()
+
+    return df_release_time
+
+
+def get_track_releases(df: pd.DataFrame):
+    """Analyzes track releases over the years."""
+    df_release = df.copy()
+    df_release = df_release.groupby("released_month") \
+        .agg(total_streams=("streams", "sum"), count_tracks=('streams', 'count')) \
+        .reset_index()
+
+    return df_release
