@@ -1,4 +1,4 @@
-# eda-spotify-dataset-2024
+# eda-spotify-dataset-2023
 
 # Exploratory Data Analysis on Spotify Dataset (2023)
 
